@@ -185,13 +185,17 @@
         <div class="time-container horizontal-padding content-container"
              [style.border-top-color]="uiTheme.timeBorder"
              [style.border-bottom-color]="uiTheme.timeBorder">
+
+        <div class="selected-time" (scroll)="test($event)">
+        </div>
+
           <div class="time-col hour-col">
-            <div class="item"
+            <!-- <div class="item"
                  [style.border-bottom-color]="uiTheme.border">
               <div class="dp-btn">
                 <span>{{ hour }}</span>
               </div>
-            </div>
+            </div> -->
             <ng-container *ngIf="!timeMeridian">
               <div class="item"
                    *ngFor="let _ of [].constructor(24); let i = index">
@@ -201,17 +205,13 @@
                      [style.background-color]="
                        (hour === i) ?
                          uiTheme.selectedBackground :
-                         (hourCol.classList.contains('hover')) ?
-                           uiTheme.hoverBackground :
                            null
                      "
                      [style.color]="
                        (hour === i) ?
                          uiTheme.selectedText :
-                         (hourCol.classList.contains('hover')) ?
-                           uiTheme.hoverText :
                            null
-                     " themeHover #hourCol>
+                     " #hourCol>
                   <span>{{ i | number: '2.0' }}</span>
                 </div>
               </div>
@@ -252,20 +252,20 @@
                 </div>
               </div>
             </ng-container>
-            <div class="item"
+            <!-- <div class="item"
                  [style.border-top-color]="uiTheme.border">
               <div class="dp-btn">
                 <span>{{ hour }}</span>
               </div>
-            </div>
+            </div> -->
           </div>
           <div class="time-col minute-col">
-            <div class="item"
+            <!-- <div class="item"
                  [style.border-bottom-color]="uiTheme.border">
               <div class="dp-btn">
                 <span>{{ minute }}</span>
               </div>
-            </div>
+            </div> -->
             <div class="item"
                  *ngFor="let _ of [].constructor(60); let i = index">
               <div class="dp-btn"
@@ -274,27 +274,24 @@
                    [style.background-color]="
                      (minute === i) ?
                        uiTheme.selectedBackground :
-                       (minuteCol.classList.contains('hover')) ?
-                         uiTheme.hoverBackground :
                          null
                    "
                    [style.color]="
                      (minute === i) ?
                        uiTheme.selectedText :
-                       (minuteCol.classList.contains('hover')) ?
-                         uiTheme.hoverText :
                          null
-                   " themeHover #minuteCol>
+                   " #minuteCol>
                 <span>{{ i | number: '2.0' }}</span>
               </div>
             </div>
-            <div class="item"
+            <!-- <div class="item"
                  [style.border-top-color]="uiTheme.border">
               <div class="dp-btn">
                 <span>{{ minute }}</span>
               </div>
-            </div>
+            </div> -->
           </div>
+
           <div *ngIf="timeShowSecond"
                class="time-col second-col">
             <div class="item"

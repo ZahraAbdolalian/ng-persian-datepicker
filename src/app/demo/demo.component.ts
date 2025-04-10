@@ -26,7 +26,7 @@ export class DemoComponent {
   uiTodayBtnEnable: boolean = true;
 
   timeEnable: boolean = true;
-  timeShowSecond: boolean = true;
+  timeShowSecond: boolean = false;
   timeMeridian: boolean = false;
 
   private _theme: string = 'default';

@@ -877,4 +877,14 @@ export class NgPersianDatepickerComponent implements OnInit, OnDestroy {
     this.uiIsVisibleChange.next(value);
   }
 
+  onHourScroll(event: any) {
+    console.log(event);
+    
+  }
+
+  test(event: any) {
+    console.log(event);
+    
+  }
+
 }
