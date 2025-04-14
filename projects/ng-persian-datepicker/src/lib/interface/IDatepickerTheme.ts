@@ -14,7 +14,7 @@ export interface IDatepickerTheme {
   selectedBackground: string;
   selectedText: string;
 
-  todayBackground: string;
+  todayBorder: string;
   todayText: string;
 
   otherMonthBackground: string;

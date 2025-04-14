@@ -1,8 +1,8 @@
 import { IDatepickerTheme } from '../../../../projects/ng-persian-datepicker/src/public-api';
 
 export const darkTheme: IDatepickerTheme = {
-  border: '#393939',
-  timeBorder: '#393939',
+  border: '#787575',
+  timeBorder: '#CACACA',
 
   background: '#222222',
   text: '#FFFFFF',
@@ -13,11 +13,11 @@ export const darkTheme: IDatepickerTheme = {
   disabledBackground: '#393939',
   disabledText: '#CCCCCC',
 
-  selectedBackground: '#D68E3A',
+  selectedBackground: '#ff8c32',
   selectedText: '#FFFFFF',
 
-  todayBackground: '#FFFFFF',
-  todayText: '#2D2D2D',
+  todayBorder: '1px solid #ccc',
+  todayText: '#FFFFFF',
 
   otherMonthBackground: 'rgba(0, 0, 0, 0)',
   otherMonthText: '#CCCCCC'

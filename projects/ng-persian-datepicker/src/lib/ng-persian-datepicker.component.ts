@@ -128,6 +128,19 @@ export class NgPersianDatepickerComponent implements OnInit, OnDestroy {
     if (this.days.length) this.setViewDate();
   }
 
+  dateEnable: boolean = false;
+  @Input('dateEnable')
+  set _dateEnable(value: boolean) {
+    this.dateEnable = value;
+    console.log(value);
+    console.log(this.selectedDate);
+
+    // if (!this.dateEnable) {
+    //   // this.formControl?.setValue('');
+    //   this.formControl?.setValue(Jalali.timestamp(this.dateValue!, false).format(this.dateFormat, this.calendarIsGregorian));
+    // }
+  }
+
   // time
   timeEnable: boolean = false;
   @Input('timeEnable')
@@ -532,10 +545,14 @@ export class NgPersianDatepickerComponent implements OnInit, OnDestroy {
     if (!this.formControl) {
       return;
     }
-
+    console.log(this.dateValue);
+    
     if (this.dateValueDefined()) {
       this.formControl?.setValue(Jalali.timestamp(this.dateValue!, false).format(this.dateFormat, this.calendarIsGregorian));
     }
+
+    console.log(this.formControl.value);
+    
   }
 
   setShowOnInputFocus(): void {
@@ -629,10 +646,14 @@ export class NgPersianDatepickerComponent implements OnInit, OnDestroy {
   }
 
   dayClick(day: IDay): void {
+    console.log(day);
+    
     if (day.isDayDisabled) {
       return;
     }
     this.changeSelectedDate(Jalali.timestamp(day.timestamp, false));
+    console.log(this.changeSelectedDate);
+    
   }
 
   isYearOfTodayDate(year: number[]): boolean {
@@ -757,6 +778,8 @@ export class NgPersianDatepickerComponent implements OnInit, OnDestroy {
 
   changeSelectedDate(date: Jalali, setInputValue: boolean = true): void {
     this.selectedDate = date.clone();
+    console.log(setInputValue);
+    
     this.onChangeSelectedDate(setInputValue);
   }
 
@@ -767,7 +790,11 @@ export class NgPersianDatepickerComponent implements OnInit, OnDestroy {
       this.selectedDate!.setSeconds(this.second);
       this.selectedDate!.setMilliseconds(0);
     } else {
+      console.log(this.selectedDate);
+      
       this.selectedDate!.startOf('day');
+      console.log(this.selectedDate);
+      
     }
     this.dateValue = this.selectedDate!.valueOf();
     if (this.uiHideAfterSelectDate && !this.preventClose) {

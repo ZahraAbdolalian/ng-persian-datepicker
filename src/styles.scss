@@ -1,4 +1,4 @@
-@use "assets/css/iran-sans-web.font.css" as *;
+// @use "assets/css/iran-sans-web.font.css" as *;
 @use "assets/css/materialize.min.css" as *;
 
 :root {
@@ -6,8 +6,19 @@
   --input-vertical-margin: 16px;
 }
 
+@font-face {
+  font-family: vazir;
+  font-style: normal;
+  font-weight: normal;
+  src: url("./assets/fonts/Vazir/Vazir-Medium-FD-WOL.eot");
+  src: url("./assets/fonts/vazir/Vazir-Medium-FD-WOL.eot?#iefix") format("embedded-opentype"),
+    url("./assets/fonts/vazir/Vazir-Medium-FD-WOL.woff") format("woff"),
+    url("./assets/fonts/vazir/Vazir-Medium-FD-WOL.woff2") format("woff2"),
+    url("./assets/fonts/vazir/Vazir-Medium-FD-WOL.ttf") format("truetype");
+}
+
 body {
-  font-family: 'IranSansWebRegular', serif;
+  font-family: 'vazir', serif;
 }
 
 input {

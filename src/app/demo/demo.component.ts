@@ -23,10 +23,11 @@ export class DemoComponent {
   uiMonthView: boolean = true;
   uiHideAfterSelectDate: boolean = false;
   uiHideOnOutsideClick: boolean = false;
-  uiTodayBtnEnable: boolean = true;
+  uiTodayBtnEnable: boolean = false;
+  dateEnable: boolean = true;
 
   timeEnable: boolean = true;
-  timeShowSecond: boolean = false;
+  timeShowSecond: boolean = true;
   timeMeridian: boolean = false;
 
   private _theme: string = 'default';
