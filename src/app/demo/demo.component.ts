@@ -25,12 +25,16 @@ export class DemoComponent {
   uiHideOnOutsideClick: boolean = false;
   uiTodayBtnEnable: boolean = false;
   dateEnable: boolean = true;
+  
+  showError: boolean = true;
 
   timeEnable: boolean = true;
   timeShowSecond: boolean = true;
   timeMeridian: boolean = false;
 
   private _theme: string = 'default';
+
+  errorMsg: string | null = null;
 
   get theme(): string {
     return this._theme;
@@ -50,7 +54,7 @@ export class DemoComponent {
   }
 
   onSelect(date: IActiveDate) {
-    console.log(date);
+    this.errorMsg = date.validationError;
   }
 
 }

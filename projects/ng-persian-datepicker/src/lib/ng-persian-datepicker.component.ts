@@ -25,6 +25,8 @@ import {
   FormControlDirective,
   FormControlName
 } from '@angular/forms';
+import { IError } from './interface/IError';
+import { defaultError } from './error/default.error';
 
 @Component({
   selector: 'ng-persian-datepicker',
@@ -94,6 +96,12 @@ export class NgPersianDatepickerComponent implements OnInit, OnDestroy {
     this.weekDays = value ? enWeekDays : faWeekDays;
     this.calendarIsGregorian = value;
   }
+
+  // error
+  errorMsg: IError = defaultError;
+
+  @Input('showError')
+  showError: boolean = false;
 
   // date
   @Input('dateValue')
@@ -319,7 +327,8 @@ export class NgPersianDatepickerComponent implements OnInit, OnDestroy {
     this.dateOnInit.next({
       shamsi: String(this.selectedDate.format(this.dateFormat)),
       gregorian: String(this.selectedDate.gregorian(this.dateGregorianFormat)),
-      timestamp: Number(this.selectedDate.valueOf())
+      timestamp: Number(this.selectedDate.valueOf()),
+      validationError: this.isValidDateTime()
     });
   }
 
@@ -789,8 +798,44 @@ export class NgPersianDatepickerComponent implements OnInit, OnDestroy {
     this.dateOnSelect.next({
       shamsi: String(this.selectedDate!.format(this.dateFormat)),
       gregorian: String(this.selectedDate!.gregorian(this.dateGregorianFormat)),
-      timestamp: Number(this.selectedDate!.valueOf())
+      timestamp: Number(this.selectedDate!.valueOf()),
+      validationError: this.isValidDateTime()
     });
+  }
+
+  isValidDateTime(): string | null {
+    const value = this.formControl?.value as string;
+
+    let dateTimeRegex =
+      /^(\d{4})\/(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])\s+([01]?\d|2[0-3]):([0-5]\d):([0-5]\d)$/;
+
+    if (!this.dateEnable) {
+      dateTimeRegex = /^([01]?\d|2[0-3]):([0-5]\d):([0-5]\d)$/;
+    } else if (!this.timeEnable) {
+      dateTimeRegex = /^\d{4}\/(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])$/;
+    }
+
+    const match = value.match(dateTimeRegex);
+
+    if (!match) {
+      return this.errorMsg.notValidDate;
+    }
+    
+    const [, yearStr, monthStr, dayStr] = match;
+    const day = +dayStr;
+
+    try {
+      const jal = Jalali.parse(`${yearStr}/${monthStr}/01`);
+      const daysInMonth = jal.monthLength();
+
+      if (day < 1 || day > daysInMonth) {
+        return this.errorMsg.notValidDaysInMonth;
+      }
+    } catch {
+      return this.errorMsg.notValidDate;
+    }
+  
+    return null;
   }
 
   set12Hour(value: number): void {

@@ -117,11 +117,19 @@
           <span class="lever"></span>
         </label>
       </div>
+      <div class="switch">
+        <p>Show Error</p>
+        <label>
+          <input type="checkbox"
+                 [(ngModel)]="showError" />
+          <span class="lever"></span>
+        </label>
+      </div>
     </div>
     <div class="col offset-l2 l4 offset-m3 m6 offset-s2 s8">
       <div class="datepicker-wrapper">
         <ng-persian-datepicker (dateOnSelect)="onSelect($event)"
-                               [dateFormat]="'HH:mm:ss'"
+                               [dateFormat]="'YYYY/MM/DD HH:mm:ss'"
                                [dateGregorianFormat]="'YYYY-MM-DD HH:mm:ss'"
                                [(uiIsVisible)]="uiIsVisible"
                                [uiTheme]="uiTheme"
@@ -133,9 +141,11 @@
                                [dateEnable]="dateEnable"
                                [timeEnable]="timeEnable"
                                [timeShowSecond]="timeShowSecond"
+                               [showError]="showError"
                                [timeMeridian]="timeMeridian">
           <div class="input-field">
             <input type="text" [formControl]="dateValue" aria-label="Datepicker Input" />
+            <span *ngIf="showError">{{errorMsg}}</span>
           </div>
         </ng-persian-datepicker>
       </div>
