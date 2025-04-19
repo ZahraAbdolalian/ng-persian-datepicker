@@ -28,7 +28,7 @@ import {
 import { IError } from './interface/IError';
 import { defaultError } from './error/default.error';
 import { IRegex } from './interface/IRegex';
-import { defaultRegex } from './regex/defult.regex';
+import { defaultRegex } from './regex/default.regex';
 
 @Component({
   selector: 'ng-persian-datepicker',
