@@ -27,6 +27,8 @@ import {
 } from '@angular/forms';
 import { IError } from './interface/IError';
 import { defaultError } from './error/default.error';
+import { IRegex } from './interface/IRegex';
+import { defaultRegex } from './regex/defult.regex';
 
 @Component({
   selector: 'ng-persian-datepicker',
@@ -74,6 +76,10 @@ export class NgPersianDatepickerComponent implements OnInit, OnDestroy {
   hour: number = 0;
   minute: number = 0;
   second: number = 0;
+
+  // validate
+  validationError: string | null = null;
+  validateRegex: IRegex = defaultRegex;
 
   /** @ReactiveForm */
 
@@ -266,7 +272,7 @@ export class NgPersianDatepickerComponent implements OnInit, OnDestroy {
             return;
           }
 
-          if (typeof valueOf === 'undefined' || valueOf === this.dateValue) {
+          if ((this.validationError == this.isValidDateTime()) && (typeof valueOf === 'undefined' || valueOf === this.dateValue)) {
             return;
           }
 
@@ -276,6 +282,7 @@ export class NgPersianDatepickerComponent implements OnInit, OnDestroy {
           }
           this.setTime(date);
           this.changeSelectedDate(date, false);
+          this.validationError = this.isValidDateTime();
         }
       });
   }
@@ -789,7 +796,7 @@ export class NgPersianDatepickerComponent implements OnInit, OnDestroy {
     } else {
       this.preventClose = false;
     }
-    if (this.lastEmittedDateValue === +this.selectedDate!) return;
+    if ((this.validationError == this.isValidDateTime()) && (this.lastEmittedDateValue === +this.selectedDate!)) return;
     if (setInputValue) {
       this.setFormControlValue();
     }
@@ -806,13 +813,12 @@ export class NgPersianDatepickerComponent implements OnInit, OnDestroy {
   isValidDateTime(): string | null {
     const value = this.formControl?.value as string;
 
-    let dateTimeRegex =
-      /^(\d{4})\/(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])\s+([01]?\d|2[0-3]):([0-5]\d):([0-5]\d)$/;
+    let dateTimeRegex = this.timeShowSecond ? this.validateRegex.DATETIME : this.validateRegex.DATETIME_NO_SECONDS;
 
     if (!this.dateEnable) {
-      dateTimeRegex = /^([01]?\d|2[0-3]):([0-5]\d):([0-5]\d)$/;
+      dateTimeRegex = this.timeShowSecond ? this.validateRegex.TIME : this.validateRegex.TIME_NO_SECONDS;
     } else if (!this.timeEnable) {
-      dateTimeRegex = /^\d{4}\/(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])$/;
+      dateTimeRegex = this.validateRegex.DATE;
     }
 
     const match = value.match(dateTimeRegex);
