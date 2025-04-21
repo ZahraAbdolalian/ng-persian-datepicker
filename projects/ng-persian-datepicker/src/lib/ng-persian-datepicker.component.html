@@ -225,7 +225,7 @@
                            uiTheme.hoverBackground :
                            null
                      "
-                     [style.width]="timeShowSecond ? '44%' : '33%'"
+                     [style.width]="timeShowSecond ? '50%' : '33%'"
                      [style.color]="
                        (hour === i) ?
                          uiTheme.selectedText :
@@ -259,6 +259,7 @@
                            uiTheme.hoverBackground :
                            null
                      "
+                     [style.width]="timeShowSecond ? '50%' : '33%'"
                      [style.color]="
                        (
                          (hour === 0 && (i + 1) === 12) ||
@@ -294,7 +295,7 @@
                    [style.border-radius]="'100%'"
                    (click)="setMinute(i)"
                    [class.selected]="minute === i"
-                   [style.width]="timeShowSecond ? '44%' : '33%'"
+                   [style.width]="timeShowSecond ? '50%' : '33%'"
                    [style.background-color]="
                      (minute === i) ?
                        uiTheme.selectedBackground :
@@ -334,7 +335,7 @@
                    [style.border-radius]="'100%'"
                    (click)="setSecond(i)"
                    [class.selected]="second === i"
-                   [style.width]="timeShowSecond ? '44%' : '33%'"
+                   [style.width]="timeShowSecond ? '50%' : '33%'"
                    [style.background-color]="
                      (second === i) ?
                        uiTheme.selectedBackground :
